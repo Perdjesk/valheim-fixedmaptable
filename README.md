@@ -1,6 +1,6 @@
 # FixedMapTable mod for Valheim
 
-This mod address different behavior use cases when sharing map exploration and pins using MapTable (i.e cartography table).
+This mod addresses different behavior use cases when sharing map exploration and pins using MapTable (i.e cartography table).
 
 ## Goals
 - Allow collaborative map exchanges between players by allowing player to modify each other pins.
