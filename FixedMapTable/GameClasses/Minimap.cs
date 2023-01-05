@@ -46,16 +46,14 @@ namespace FixedMapTable.GameClasses
 
         /**
          * Player's pins are only added if none exists within conflict radius, when creating from Minimap UI.
+         * returns false to interrupt the addition of pin when at least one pin is withing conflictRadius
+         * return true to continue the addition of pin with original code
          */
         [HarmonyPrefix]
         [HarmonyPatch("OnMapDblClick")]
         static bool OnMapDblClick_PrefixPatch()
         {
-            if (PinsInRange(Minimap.instance.ScreenToWorldPoint(Input.mousePosition), ref Minimap.instance.m_pins).Count > 0)
-            {
-                return false;
-            }
-            return true;
+            return !(PinsInRange(Minimap.instance.ScreenToWorldPoint(Input.mousePosition), ref Minimap.instance.m_pins).Count > 0);
         }
 
         /**
@@ -313,7 +311,6 @@ namespace FixedMapTable.GameClasses
             float radius = conflictRadius;
             foreach (PinData pin in pinsCollection)
             {
-                float distance = Utils.DistanceXZ(pos, pin.m_pos);
                 if (Utils.DistanceXZ(pos, pin.m_pos) < radius)
                 {
                     pins.Add(pin);
